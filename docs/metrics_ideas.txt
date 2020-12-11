@@ -1,8 +1,15 @@
+Metrics:
+    - Jaccard Index
+    - IDF similarity
+    - Adamic similarity
+    - Modified Adamic similarity
+
+
 Infer social links:
 
     Parameters provided in the paper:
         - Number of races in common
-        - Number of participants (analog to rarity in the set)
+        - Number of participants in the races (analog to rarity in the set)
 
     Specific parameters:
         - Closeness of performance
@@ -10,8 +17,11 @@ Infer social links:
         - Elapsed time since the races
 
 Monitor health conditions:
-
+Not related to similarities
     - Race mark
     - Time evolution on the same race from one edition to another
     - Level of the Club
 
+Advices:
+- Run the metrics on the database
+- How do they perform on the database
