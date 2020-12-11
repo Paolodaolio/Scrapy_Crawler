@@ -1,0 +1,17 @@
+Infer social links:
+
+    Parameters provided in the paper:
+        - Number of races in common
+        - Number of participants (analog to rarity in the set)
+
+    Specific parameters:
+        - Closeness of performance
+        - Club
+        - Elapsed time since the races
+
+Monitor health conditions:
+
+    - Race mark
+    - Time evolution on the same race from one edition to another
+    - Level of the Club
+
