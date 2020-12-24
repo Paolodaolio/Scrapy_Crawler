@@ -1,0 +1,5 @@
+22510 record fetched from into table  Person
+99 record fetched from into table  Race
+5419 record fetched from into table  Club
+9486 record fetched from into table  Record_Club_Person
+24523 record fetched from into table  Record_Race_Person

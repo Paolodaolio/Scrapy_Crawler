@@ -1,7 +1,7 @@
 import csv
 
 class Race:
-    def __init__(self, elevation,date,partecipants,level,club,name,lenght):
+    def __init__(self, elevation,date,partecipants,name,lenght):
         self.elevation = elevation
         self.date = date
         self.partecipants = partecipants
@@ -18,7 +18,7 @@ class Race:
         return list
 
 
-class Runner:
+class Person:
     races = []
     id = None
     def __init__(self,name):
@@ -54,4 +54,20 @@ class Club:
         for mem in self.members:
             output = str(output+","+mem)
         return output
+
+
+class Record_Race_Person:
+    def __init__(self, person_id, race_id, score, time, category):
+        self.person_id = person_id
+        self.race_id = race_id
+        self.score = score
+        self.time = time
+        self.category = category
+
+
+class Record_Club_Person:
+    def __init__(self,club_id,person_id):
+        self.club_id = club_id
+        self.person_id = person_id
+
 
