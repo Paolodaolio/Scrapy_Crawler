@@ -1,5 +1,5 @@
-from Classes.race import Race
-from Classes.runner import Runner
+from classes.race import Race
+from classes.runner import Runner
 from math import log, sqrt
 
 

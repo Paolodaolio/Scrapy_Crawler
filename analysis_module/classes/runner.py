@@ -1,5 +1,5 @@
 import csv
-from Database.manager import fetch_races_by_runner, fetch_runner_by_name
+from database.manager import fetch_races_by_runner, fetch_runner_by_name
 
 class Runner:
 

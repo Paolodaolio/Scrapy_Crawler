@@ -1,5 +1,6 @@
-from Classes.runner import Runner
+from classes.runner import Runner
 from metrics import *
+from database.manager import finished
 
 def metrics_tab(runner1:Runner, runner2:Runner):
     print("jaccard : {} \t idf : {} \t adamic : {} \t psim_q : {}".format(
@@ -24,6 +25,8 @@ def main():
     runner1 = input_name()
     runner2 = input_name()
     metrics_tab(runner1, runner2)
+    finished()
+
 
 main()
 

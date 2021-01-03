@@ -1,5 +1,5 @@
-from Classes.race import Race
-from Database.connection import get_cursor, close_connection
+from classes.race import Race
+from database.connection import get_cursor, close_connection
 
 connection, cursor = get_cursor()
 schema = "public"
