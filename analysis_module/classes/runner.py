@@ -18,3 +18,9 @@ class Runner:
             for race in self.races:
                 write = csv.writer(file)
                 write.writerow(race.to_csv())
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return str(self)

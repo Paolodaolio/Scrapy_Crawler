@@ -1,6 +1,7 @@
 from classes.race import Race
 from classes.club import Club
 from database.connection import get_cursor, close_connection
+from re import sub
 
 connection, cursor = get_cursor()
 schema = "public"
@@ -8,6 +9,7 @@ schema = "public"
 
 def fetch_runner_by_name(name):
     id = None
+    name = sub("'", "''", name)
     query = "SELECT * FROM {}.Person WHERE account_name = '{}';".format(schema, name)
     cursor.execute(query)
     count = cursor.rowcount
