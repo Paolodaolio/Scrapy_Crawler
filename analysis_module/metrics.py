@@ -22,7 +22,7 @@ def union(race_set1, race_set2):
             res.append(race)
     return res
 
-def rarity(race:Race):
+def frequency(race:Race):
     return race.partecipants
 
 def idf(race:Race):
@@ -48,4 +48,5 @@ def adamic_similarity(race_set1, race_set2):
     return sum([idf(race) for race in intersection(race_set1, race_set2)])
 
 def psim_q(race_set1, race_set2, q=3):
-    return sum([1 / rarity(race) ** q for race in intersection(race_set1, race_set2)])
+    amplifier = 10 ** 7
+    return sum([amplifier / (frequency(race) ** q) for race in intersection(race_set1, race_set2)])

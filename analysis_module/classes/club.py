@@ -1,17 +1,11 @@
 class Club:
-    members=[]
-    def __init__(self, name ):
+
+    def __init__(self, id, name ):
         self.name = name
+        self.id = id
 
-    def add_member(self, member):
-        self.members.append(member)
-
-    def fetch_members(self):
-        return self.members
-
-    def insert_list(self):
-        output = ""
-        for mem in self.members:
-            output = str(output+","+mem)
-        return output
+    def __eq__(self, o):
+        if type(self) == type(o):
+            return self.id == o
+        return False
 

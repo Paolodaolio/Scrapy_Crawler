@@ -1,5 +1,5 @@
 import csv
-from database.manager import fetch_races_by_runner, fetch_runner_by_name
+from database.manager import fetch_runner_by_name, fetch_races_by_runner, fetch_club_by_runner
 
 class Runner:
 
@@ -8,6 +8,7 @@ class Runner:
         self.id = fetch_runner_by_name(self.name)
         if self.id is not None:
             self.races = fetch_races_by_runner(self.id)
+            self.clubs = fetch_club_by_runner(self.id)
         else:
             raise NameError("No runner with name " + self.name)
 
@@ -17,6 +18,3 @@ class Runner:
             for race in self.races:
                 write = csv.writer(file)
                 write.writerow(race.to_csv())
-
-    def __str__(self):
-        return self.name
