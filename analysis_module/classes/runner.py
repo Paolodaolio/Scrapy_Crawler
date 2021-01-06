@@ -12,12 +12,11 @@ class Runner:
         else:
             raise NameError("No runner with name " + self.name)
 
-
-    def to_csv(self):
-        with open(str(self.name)+'.csv', 'a', newline='', encoding='utf-8') as file:
-            for race in self.races:
-                write = csv.writer(file)
-                write.writerow(race.to_csv())
+    def same_club(self, runner):
+        for club in self.clubs:
+            if club in runner.clubs:
+                return True
+        return False
 
     def __str__(self):
         return self.name
