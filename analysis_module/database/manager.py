@@ -41,10 +41,21 @@ def fetch_club_by_runner(id):
     return clubs
 
 def random_name():
-    query = "SELECT account_name FROM {}.Person ORDER BY RANDOM() LIMIT 1".format(schema)
+    query = "SELECT account_name FROM public.Person ORDER BY RANDOM() LIMIT 1"
     cursor.execute(query)
     for row in cursor:
         return row[0]
+
+def random_linked_names():
+    names = []
+    query = ("SELECT account_name " + 
+             "FROM (public.person INNER JOIN public.record_club_person ON public.person.person_id = public.record_club_person.person_id) " +
+             "WHERE club_id IN (SELECT club_id FROM public.record_club_person GROUP BY club_id HAVING COUNT(*) > 2 ORDER BY RANDOM() LIMIT 1) " +
+             "ORDER BY RANDOM() LIMIT 2;")
+    cursor.execute(query)
+    for row in cursor:
+        names.append(row[0])
+    return names
 
 def finished():
     close_connection(connection, cursor)
