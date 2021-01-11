@@ -18,3 +18,9 @@ INNER JOIN public.record_club_person
 ON public.person.person_id = public.record_club_person.person_id)
 WHERE club_id IN (SELECT club_id FROM public.record_club_person GROUP BY club_id HAVING COUNT(*) > 5 ORDER BY RANDOM() LIMIT 1)
 ORDER BY RANDOM() LIMIT 2;
+
+SELECT DISTINCT account_name
+FROM (public.person
+INNER JOIN public.record_race_person
+ON public.person.person_id = public.record_race_person.person_id)
+WHERE race_id IN (SELECT race_id FROM public.record_race_person WHERE person_id = {});

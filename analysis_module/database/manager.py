@@ -57,5 +57,18 @@ def random_linked_names():
         names.append(row[0])
     return names
 
+def potentially_linked_to_runner(id):
+    names = []
+    query = ("SELECT DISTINCT account_name " +
+             "FROM (public.person " +
+             "INNER JOIN public.record_race_person " +
+             "ON public.person.person_id = public.record_race_person.person_id) " +
+             "WHERE race_id IN (SELECT race_id FROM public.record_race_person WHERE person_id = {});".format(id))
+    cursor.execute(query)
+    for row in cursor:
+        names.append(row[0])
+    return names
+
+
 def finished():
     close_connection(connection, cursor)
