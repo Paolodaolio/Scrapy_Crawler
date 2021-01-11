@@ -12,7 +12,7 @@ INNER JOIN public.record_club_person
 ON public.person.person_id = public.record_club_person.person_id)
 WHERE club_id = 11353;
 
-SELECT *
+SELECT account_name
 FROM (public.person
 INNER JOIN public.record_club_person
 ON public.person.person_id = public.record_club_person.person_id)
