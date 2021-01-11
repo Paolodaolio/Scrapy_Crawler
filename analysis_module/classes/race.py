@@ -3,19 +3,10 @@ class Race:
     def __init__(self, id, name, length, date, elevation, partecipants):
         self.id = int(id)
         self.name = str(name)
-        self.elevation = float(elevation)
-        self.date = str(date)
+        self.elevation = elevation
+        self.date = date
         self.partecipants = int(partecipants)
-        self.length = float(length)
-
-    def to_csv(self):
-        list = []
-        list.append(self.elevation)
-        list.append(self.date)
-        list.append(self.runner)
-        list.append(self.name)
-        list.append(self.lenght)
-        return list
+        self.length = length
     
     def __str__(self):
         return "{} on {}".format(self.name, self.date)

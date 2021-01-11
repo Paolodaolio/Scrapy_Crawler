@@ -10,7 +10,7 @@ schema = "public"
 def fetch_runner_by_name(name):
     id = None
     name = sub("'", "''", name)
-    query = "SELECT * FROM {}.Person WHERE account_name = '{}';".format(schema, name)
+    query = "SELECT * FROM public.Person WHERE account_name = '{}';".format(name)
     cursor.execute(query)
     count = cursor.rowcount
     for row in cursor:
@@ -20,10 +20,10 @@ def fetch_runner_by_name(name):
 
 def fetch_races_by_runner(id):
     races = []
-    query = ("SELECT * " +
-                    "FROM {}.Race ".format(schema) +
-                    "INNER JOIN {}.Record_race_person ON {}.Race.race_id = public.Record_race_person.race_id ".format(schema, schema) +
-                    "WHERE person_id = {};".format(id))
+    query = ("SELECT public.race.race_id, race_name, lenght, race_date, elevation, partecipants_number " +
+             "FROM public.Race " +
+             "INNER JOIN public.Record_race_person ON public.Race.race_id = public.Record_race_person.race_id " +
+             "WHERE person_id = {};".format(id))
     cursor.execute(query)
     for row in cursor:
         races.append(Race(row[0], row[1], row[2], row[3], row[4], row[5]))
@@ -32,8 +32,8 @@ def fetch_races_by_runner(id):
 def fetch_club_by_runner(id):
     clubs = []
     query = ("SELECT public.Club.club_id, club_name " +
-                    "FROM {}.Club ".format(schema) +
-                    "INNER JOIN {}.Record_club_person ON {}.Club.club_id = public.Record_club_person.club_id ".format(schema, schema) +
+                    "FROM public.Club " +
+                    "INNER JOIN public.Record_club_person ON public.Club.club_id = public.Record_club_person.club_id " +
                     "WHERE person_id = {};".format(id))
     cursor.execute(query)
     for row in cursor:
