@@ -1,4 +1,3 @@
-from os import fpathconf
 import matplotlib.pyplot as plt
 import numpy as np
 from classes.runner import Runner
@@ -68,7 +67,7 @@ def metric_evaluation(samples, metrics, threshold):
 
 
 def threshold_analysis():
-    samples = 100
+    samples = 1000
     max_threshold = 2
     thresholds = np.linspace(0, max_threshold, num=100)
     metrics = [jaccard_index, idf_similarity, adamic_similarity, psim_q]
