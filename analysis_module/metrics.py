@@ -45,9 +45,9 @@ def idf_similarity(race_set1, race_set2):
     return intersection_sum / (sqrt(sum1) * sqrt(sum2))
 
 def adamic_similarity(race_set1, race_set2):
-    amplifier = 10 ** 1
+    amplifier = 10 ** 0
     return amplifier * sum([idf(race) for race in intersection(race_set1, race_set2)])
 
 def psim_q(race_set1, race_set2, q=3):
-    amplifier = 10 ** 7
+    amplifier = 10 ** 6
     return sum([amplifier / (frequency(race) ** q) for race in intersection(race_set1, race_set2)])

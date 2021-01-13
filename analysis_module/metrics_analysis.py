@@ -68,8 +68,8 @@ def metric_evaluation(samples, metrics, threshold):
 
 def threshold_analysis():
     samples = 1000
-    max_threshold = 2
-    thresholds = np.linspace(0, max_threshold, num=100)
+    max_threshold = 1.5
+    thresholds = np.linspace(0, max_threshold, num=300)
     metrics = [jaccard_index, idf_similarity, adamic_similarity, psim_q]
     jaccard_TPR = []
     jaccard_FPR = []
@@ -92,15 +92,17 @@ def threshold_analysis():
         psim_TPR.append(TPR[3])
         psim_FPR.append(FPR[3])
     
-    plt.plot(thresholds, jaccard_TPR, label = "jaccard TPR")
-    plt.plot(thresholds, jaccard_FPR, label = "jaccard FPR")
-    plt.plot(thresholds, idf_TPR, label = "idf TPR")
-    plt.plot(thresholds, idf_FPR, label = "idf FPR")
-    plt.plot(thresholds, adamic_TPR, label = "adamic TPR")
-    plt.plot(thresholds, adamic_FPR, label = "adamic FPR")
-    plt.plot(thresholds, psim_TPR, label = "psim TPR")
-    plt.plot(thresholds, psim_FPR, label = "psim FPR")
+    plt.plot(thresholds, jaccard_TPR, label = "Jaccard TPR")
+    plt.plot(thresholds, jaccard_FPR, label = "Jaccard FPR")
+    plt.plot(thresholds, idf_TPR, label = "IDF TPR")
+    plt.plot(thresholds, idf_FPR, label = "IDF FPR")
+    plt.plot(thresholds, adamic_TPR, label = "Adamic TPR")
+    plt.plot(thresholds, adamic_FPR, label = "Adamic FPR")
+    plt.plot(thresholds, psim_TPR, label = "Psim-3 TPR")
+    plt.plot(thresholds, psim_FPR, label = "Psim-3 FPR")
 
+    plt.xlabel("threshold")
+    plt.ylabel("probability")
     plt.legend()
     plt.show()
 
