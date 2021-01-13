@@ -17,8 +17,6 @@ nocite: |
 
 # Introduction
 
-blablabla
-
 # Scraping
 
 The python language was used for the scraping phase, in particular a module called Selenium which allows you to easily obtain a "webdriver" that is a construct that can freely surf the net exactly like a user.
@@ -41,7 +39,7 @@ To infer social link between runners, we need to see the races they have in comm
 
 - *Jaccard index*: This metric focuses on the proportion of common races in the record. it is defined as $\text{J}(X,Y) = \frac{|X \cap Y|}{|X \cup Y|}$. It is implemented in the function `jaccard_index`.
 
-- *IDF similarity*: This metric depends on a measure of the rarity of a race defined as $IDF_i = \log \frac{1}{f_i}$ with the frequency of the race $f_i$ the number of participants. Finally the metric is define as followed.
+- *IDF similarity*: This metric depends on a measure of the rarity of a race defined as $IDF_i = \log \frac{1}{f_i}$ with the frequency of the race $f_i$ equals the number of participants. Finally the metric is define as followed.
 $$
 \text{Cosine-IDF}(X,Y) = \frac{\sum_{x \in X \cap Y} IDF_x^2}{\sqrt{\sum_{x \in X} IDF_x^2} \sqrt{\sum_{y \in Y} IDF_y^2}}
 $$
@@ -53,19 +51,27 @@ $$
 
 ## Metrics Evaluation
 
-The following part aims at assessing how accurately the previous metrics are at infering social links. As all the metrics return a number, we need to define a threshold such that if the returned value is above the threshold, we consider that the two persons are linked and if the returned value is below the threshold, we consider that the two person are not linked. All the methods described in this part are implemented in `analysis_module/metrics_analysis.py`
+The following part aims at assessing how accurately the previous metrics are at infering social links. As all the metrics return a number, we need to define a threshold such that if the returned value is above the threshold, we consider that the two persons are linked and if the returned value is below the threshold, we consider that the two person are not linked. All the methods described in this part are implemented in `analysis_module/metrics_analysis.py`.
 
 The first method followed by the paper written by @cunche:hal-00747825 is to separate the database into two sets: a first set where every person is really socially linked to another one and another set where there is no couple of linked people. Then, we run the metric on the whole set and count the number of true positives, true negatives, false positives and false negatives. The closer we get from reality, the most accurate is the metric.
-As we didn't had the time and ressources to build such databases based on verified testimonies, we made the following simplifying assumption: *two people know each other if and only if they ran in the same club at least one time*. Running the metrics analysis based on this assumption gave erratic results so we realised that this assumption is false and could not replace real data on social links.
+As we didn't had the time and ressources to build such databases based on verified testimonies, we made the following simplifying assumption: *two people know each other if and only if they ran in the same club at least one time*. This assumption was the only possible one with our collected data because the clubs are the closest information from the social link that was not used by our metrics.
+
+Running the metrics analysis based on this assumption gave the results diplayed in figure \ref{1}. The true positive rate is defined as $\text{TPR} = \frac{n_{TP}}{n_{TP} + n_{FN}}$ and the false positive rate as $\text{FPR} = \frac{n_{FP}}{n_{FP} + n_{TN}}$ with $n_{TP}$ the number of true positives, $n_{TN}$ the number of true negatives, $n_{FP}$ the number of false positives and $n_{FN}$ the number of false negatives. We observe that no metric gives a true positive rate higher than $0.6$ which is highly insufficient to be reliable. From this result we can conclude that either our metrics are not pertinent to infer social links or our previous assumption is too often false, i.e. people from different clubs know each other.
+
+![Threshold analysis (1000 samples) \label{1}](threshold.png){ width=100% }
 
 As we could not properly conduct this analysis, the choice of the threshold and metric in the final application is left to the user.
 
 ## Analysis Python Module
 
-The final application is provided in `analysis_module/main_link.py`. To work it needs to be connected with the database filled with the data scraped by the scraping module. This data is stored in `Data/backup_[date]` and can be loaded in a postgreSQL database with the command `psql runners < backup_[date]`. It may be required to tweak the file `analysis_module/database/connection.py` to match each specific configuration of the database. All the queries needed to perform the analysis are implemented in `analysis_module/database/manager.py`. The final application asks for a name and compute the metrics for all potentially linked runners from the database. We start by fetching all runners that has at least one race in common with the targetted runner. Then we compute the metrics matrix that stores the value returned for each metric and for each runner. Finally we provide a way for the user to have a comprehensive view of this matrix by displaying the most probable linked runners based on each metric or the mean of all them. This application was designed for runners to check if they suffer from a privacy breach on this particular website and to see if they are vulnerable to social engineering attacks.
+The final application is provided in `analysis_module/main_link.py`.
+
+To make it work, the user needs to be connected to the database filled with the data scraped by the scraping module. This data is stored in `Data/backup_[date]` and can be loaded in a postgreSQL database with the command `psql runners < backup_[date]`. It may be required to tweak the file `analysis_module/database/connection.py` to match each specific configuration of the database. All the queries needed to perform the analysis are implemented in `analysis_module/database/manager.py`.
+
+The final application asks for a name and computes the metrics for all potentially linked runners from the database. We start by fetching all runners that has at least one race in common with the targetted runner. Then we compute the metrics matrix that stores the value returned for each metric and for each runner. Finally we provide a way for the user to have a comprehensive view of this matrix by displaying the most probable linked runners based on each metric or the mean of all them.
+
+This application was designed for runners to check if they suffer from a privacy breach on this particular website and to see if they are vulnerable to social engineering attacks.
 
 # Conclusion
-
-blablabla
 
 # References
