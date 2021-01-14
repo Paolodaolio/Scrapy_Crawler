@@ -1,0 +1,6 @@
+- Put an example (Cédric Lauradoux knows DESPREZ FRÉDÉRIC)
+- Put numbers on scraping part
+- Put graph in appendix
+- Put which file do what in appendix
+- Introduction : What is at stake ? Why this kind of data can be interesting ? Put a lot of ideas
+- Presentation : 10-11 slides
