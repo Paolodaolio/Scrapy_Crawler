@@ -1,0 +1,27 @@
+
+# Data Analysis
+
+We now want to use the scraped data to find runners knowing each other. Our first approach is to use the races that the runners have done and find common ones for different people. Our analysis is based on the fact that people who ran the same race may have been in contact, know each other and develop a social link. First, we need to define functions to quantify the likelihood of two people knowing each other based on their race records.
+
+## Similarity Metrics
+
+These kind of functions are called similarity metrics.
+
+These metrics are taken from previous works on linking different types of data, we selected 4 metrics:
+(mathematical definitions)
+- Jaccard index: focuses on the proportion of common races in the two records. If people are together in every race they ran, their have a higher probability of being linked.
+- IDF similarity: focuses on the rarity of the common races. If people ran a race with few participants they are more likely to have been in contact during this race.
+- Adamic similarity: This is a different way of taking previous caracteristics into considerations without using the races that are not in common.
+- Psim-q: This last one only changes the log function by a power to strengthen the influence of the rarest elements.
+
+## Metrics Evaluation
+
+Then we want to see if these metrics are performant to infer real social links. Which one is better and does it have the potential to produce a powerful tool to guess linked people in real life?
+And for each metric, what is the optimal threshold to determine if people are linked or not?
+
+The way to get this information is by running the metrics on a dataset where we know which people are linked or not. We couldn't get this dataset by a lack of time and ressources but we wanted to simulate such analysis.
+The way we found to do that was to use a collected information that was not used by the metrics but would be close from a social link. This information is the club in which people belong. We made the following assumption: two people are socially linked iif they ran in the same club at least once. The results of this simulated analysis were very bad because none of the metrics gave a true positive rate higher than 0.6 which is insufficient to provide a reliable guess. This is because many runners from the same club have no race in common. The false positive rate is very low so the metrics may be performant in a real analysis. This is left open.
+
+## Final Application
+
+The final application aims at offering every runner a mean to check if there are potential data leaks from their race record. The application takes as input a runner name, fetch this name in the database and run the metrics with all potentially linked runners. The user can then display a list of the most probable names based on each metric or the mean of all of them. Here is for instance the result for Cédric Lauradoux giving some accurate names. 
