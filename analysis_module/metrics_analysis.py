@@ -54,6 +54,7 @@ def metric_evaluation(samples, metrics, threshold):
             if linked(metric, threshold, runner1, runner2):
                     true_positive[i] += 1
             else:
+                    print("{}_metric({},{}) = {}".format(i, runner1.name, runner2.name, metric(runner1.races, runner2.races)))
                     false_negative[i] += 1
 
     print("Threshold = {}".format(threshold))
@@ -63,13 +64,15 @@ def metric_evaluation(samples, metrics, threshold):
     print(false_negative)
     TPR = [tp / (tp + fn) if tp > 0 else 0 for tp, fn in zip(true_positive, false_negative)]
     FPR = [fp / (fp + tn) if fp > 0 else 0 for fp, tn in zip(false_positive, true_negative)]
+    print(TPR)
+    print(FPR)
     return TPR, FPR
 
 
 def threshold_analysis():
-    samples = 1000
+    samples = 100
     max_threshold = 1.5
-    thresholds = np.linspace(0, max_threshold, num=300)
+    thresholds = np.linspace(0, max_threshold, num=100)
     metrics = [jaccard_index, idf_similarity, adamic_similarity, psim_q]
     jaccard_TPR = []
     jaccard_FPR = []

@@ -5,7 +5,7 @@ from math import log, sqrt
 
 # Main function to infer social link
 def linked(metric, threshold, runner1:Runner, runner2:Runner):
-    if metric(runner1.races, runner2.races) > threshold:
+    if metric(runner1.races, runner2.races) >= threshold:
         return True
     else:
         return False
