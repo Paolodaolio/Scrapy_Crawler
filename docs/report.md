@@ -19,14 +19,25 @@ nocite: |
 
 # Scraping
 
-The python language was used for the scraping phase, in particular a module called Selenium which allows you to easily obtain a "webdriver" that is a construct that can freely surf the net exactly like a user.
-The driver used is a "chromedriver" which allows you to navigate on Google Chrome.
+The scraping is a technique that aims to find and collect data directly from the html of a website, in this specific case it's used a specific module called "Selenium" that run on a python engine.
+This module allows you to easily obtain a "webdriver" which is a construct that can freely surf the net exactly like a human-user, the driver used is a "chromedriver" which allows the scraper to navigate through Google Chrome.
 The basic idea of a scraping process is to find a fixed path through which the driver can be able to constantly obtain new information, process and finally store them.
+Selenium provides lots of different ways to find and extrapolate data, the most used in our scraper is the XPATH, that is a unique identifier for every html construct.
 Thanks to the analysis of the website it was found a page with all the races chronologically ordered; for each race in the list the driver collected: number of partecipants, date, name of the race, elevation (if present), length and the name of every runner with some related information.
-Once collected, the data is saved in a open source relational database, postgreSQL was used for its simplicity of installation and for its good functioning with python. 
+In order to handle easily all the data we used python classes filled with the collected data, solution that has been revealed really handy.
+Once collected, the data is saved in a open source relational database in 5 different tables: "Person","Race","Record_Race_Person","Record_Club_Person" and "Club", postgreSQL was used for its simplicity of installation and for its good functioning with python. 
 in a short time this method proved to be particularly effective allowing to populate the database in a consistent way.
 Almost six hundred thousands of different people are present in the database, who, in total, have recorded more than one million races.
 The races scraped from the sites are all about the last 3 years (from early 2018 to 2021). Another intresting data collected is the "Club" in which a runner can enroll and race for, in more than two thousands races over one hundred thousand different clubs partecipated.
+the data are schematically transcribed here:
+
+-590912 record fetched from into table  Person
+-2217 record fetched from into table  Race
+-102190 record fetched from into table  Club
+-347362 record fetched from into table  Record_Club_Person
+-1028563 record fetched from into table  Record_Race_Person
+
+// for Leò: can u put some fancy dots instead of "-"? Thank you :* \\
 
 # Data Analysis
 
