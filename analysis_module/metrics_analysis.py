@@ -4,25 +4,6 @@ from classes.runner import Runner
 from metrics import *
 from database.manager import finished, random_name, random_linked_names
 
-def metrics_tab(runner1:Runner, runner2:Runner):
-    print("jaccard : {} \t idf : {} \t adamic : {} \t psim_q : {}".format(
-        jaccard_index(runner1.races, runner2.races),
-        idf_similarity(runner1.races, runner2.races),
-        adamic_similarity(runner1.races, runner2.races),
-        psim_q(runner1.races, runner2.races)
-    ))
-
-def input_name():
-    runner = None
-    while runner is None:
-        name = input("Input a runner name : ")
-        try:
-            runner = Runner(name)
-        except NameError:
-            print("Invalid name")
-            runner = None
-    return runner
-
 def random_runner():
     return Runner(random_name())
 
@@ -70,9 +51,9 @@ def metric_evaluation(samples, metrics, threshold):
 
 
 def threshold_analysis():
-    samples = 100
+    samples = 10
     max_threshold = 1.5
-    thresholds = np.linspace(0, max_threshold, num=100)
+    thresholds = np.linspace(0, max_threshold, num=10)
     metrics = [jaccard_index, idf_similarity, adamic_similarity, psim_q]
     jaccard_TPR = []
     jaccard_FPR = []
