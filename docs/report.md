@@ -8,7 +8,7 @@ author:
 date: 22/01/2021
 numbersections: true
 geometry : margin=3cm
-fontsize : 11pt
+fontsize : 10pt
 abstract: >
   The aim of this project is to infer social links between people based on their running records found on a community french website. The first part of this study was to collect the maximum amount of data from the website. The second part was to analyse this data using similarity metrics to find matching profiles. The produced tool is able to quantify the probability of two people knowing each other and for one person, reavealing all possible related people. The results of this study still have to be tested by contacting the recorded people and verifying the correctness of the infered social links.
 nocite: |
@@ -16,6 +16,12 @@ nocite: |
 ---
 
 # Introduction
+
+The idea of this project comes from the private information leak concerns about the running community. There is a french community website called <http://www.kikourou.net> where people add the records of every french running event since year 2000. This represents an enormous amount of information with a lot of details. A very important concern nowadays in the field of cybersecurity is how vulnerable people and organization are to social engineering attacks. This kind of attack is very often the first step of critical security incidents. As many people are runners, finding linked people among this base could enable an attacker to find potential targets to reach valuable people. For instance we found a very rich record for Guillaume Poupard, the head of ANSSI (the french governmental cybersecurity agency).
+
+Among the information available on this website, we have many ideas about how we could detect social links. The first approach would be to count the number of common races between two runners. If two people ran a large number of the same races they have a high probability of being in contact at one time. Some information on these common races could help us refine this probability. The less participants there is in the race, the most likely the contact is. Equally, people have more chances of knowing each other if they ran in the same category or if their performance is close.
+
+To conduct this analysis, we started to collect all the information available on this website to populate our own database. Then we implemented an application to infer social links based on the collected information.
 
 # Scraping
 
@@ -84,6 +90,8 @@ This application was designed for runners to check if they suffer from a privacy
 For instance, we ran the application of a known runner and the application provided a very good result in second position based on the mean of all metrics. The output of the application is diplayed in figure \ref{3} in appendix. This proves that this application can be a tool to perform social engineering attacks.
 
 # Conclusion
+
+We were able to collect a very large amount of data in our database where we found multiple known names. We also implemented the analysis module to evaluate the application performance but due to the lack of known dataset, we were not able to have conclusive results. The final application can still be used by runners to evaluate how exposed their private information is on this website.
 
 # Appendix
 

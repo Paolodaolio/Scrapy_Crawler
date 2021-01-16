@@ -1,6 +1,6 @@
 DONE - Put an example (Cédric Lauradoux knows DESPREZ FRÉDÉRIC)
 DONE - Put numbers on scraping part
 DONE - Put graph in appendix
-- Put which file do what in appendix
-- Introduction : What is at stake ? Why this kind of data can be interesting ? Put a lot of ideas
-- Presentation : 10-11 slides
+DONE - Put which file do what in appendix
+DONE - Introduction and conclusion: What is at stake ? Why this kind of data can be interesting ? Put a lot of ideas
+DONE - Presentation : 10-11 slides
