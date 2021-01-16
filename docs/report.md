@@ -19,25 +19,31 @@ nocite: |
 
 # Scraping
 
-The scraping is a technique that aims to find and collect data directly from the html of a website, in this specific case it's used a specific module called "Selenium" that run on a python engine.
-This module allows you to easily obtain a "webdriver" which is a construct that can freely surf the net exactly like a human-user, the driver used is a "chromedriver" which allows the scraper to navigate through Google Chrome.
+The scraping is a technique that aims to find and collect data directly from the HTML code of a website, in this specific case we used a specific module called "Selenium" that run on a python engine.
+This module allows to easily obtain a "webdriver" which is a construct that can freely surf the net exactly like a human user. The driver we used is a `chromedriver` which allows the scraper to navigate through Google Chrome.
+
 The basic idea of a scraping process is to find a fixed path through which the driver can be able to constantly obtain new information, process and finally store them.
-Selenium provides lots of different ways to find and extrapolate data, the most used in our scraper is the XPATH, that is a unique identifier for every html construct.
-Thanks to the analysis of the website it was found a page with all the races chronologically ordered; for each race in the list the driver collected: number of partecipants, date, name of the race, elevation (if present), length and the name of every runner with some related information.
-In order to handle easily all the data we used python classes filled with the collected data, solution that has been revealed really handy.
-Once collected, the data is saved in a open source relational database in 5 different tables: "Person","Race","Record_Race_Person","Record_Club_Person" and "Club", postgreSQL was used for its simplicity of installation and for its good functioning with python. 
-in a short time this method proved to be particularly effective allowing to populate the database in a consistent way.
+Selenium provides lots of different ways to find and extrapolate data, the most used in our scraper is the XPATH, that is a unique identifier for every HTML construct.
+Thanks to the analysis of the website it was found a page with all the races chronologically ordered; for each race in the list the driver collected: number of participants, date, name of the race, elevation (if present), length and the name of every runner with some related information.
+
+In order to handle easily all the data we used python classes filled with the collected data. This solution has been revealed really handy.
+Once collected, the data is saved in a open source relational database in 5 different tables: `Person`, `Race`, `Record_Race_Person`, `Record_Club_Person` and `Club`. PostgreSQL was used for its simplicity of installation and for its good matching with python. The architecture of the database can be found in figure \ref{2} in appendix.
+
+In a short time this method proved to be particularly effective allowing to populate the database in a consistent way.
 Almost six hundred thousands of different people are present in the database, who, in total, have recorded more than one million races.
-The races scraped from the sites are all about the last 3 years (from early 2018 to 2021). Another intresting data collected is the "Club" in which a runner can enroll and race for, in more than two thousands races over one hundred thousand different clubs partecipated.
-the data are schematically transcribed here:
+The races scraped from the sites are all about the last 3 years (from early 2018 to 2021). Another intresting data collected is the Club in which a runner can enroll and race for, in more than two thousands races over one hundred thousand different clubs participated.
 
--590912 record fetched from into table  Person
--2217 record fetched from into table  Race
--102190 record fetched from into table  Club
--347362 record fetched from into table  Record_Club_Person
--1028563 record fetched from into table  Record_Race_Person
+The amount of data is schematically transcribed here:
 
-// for Leò: can u put some fancy dots instead of "-"? Thank you :* \\
+- 590912 records fetched from table `Person`
+
+- 2217 records fetched from table `Race`
+
+- 102190 records fetched from table `Club`
+
+- 347362 records fetched from table `Record_Club_Person`
+
+- 1028563 records fetched from table `Record_Race_Person`
 
 # Data Analysis
 
@@ -67,9 +73,7 @@ The following part aims at assessing how accurately the previous metrics are at 
 The first method followed by the paper written by @cunche:hal-00747825 is to separate the database into two sets: a first set where every person is really socially linked to another one and another set where there is no couple of linked people. Then, we run the metric on the whole set and count the number of true positives, true negatives, false positives and false negatives. The closer we get from reality, the most accurate is the metric.
 As we didn't had the time and ressources to build such databases based on verified testimonies, we made the following simplifying assumption: *two people know each other if and only if they ran in the same club at least one time*. This assumption was the only possible one with our collected data because the clubs are the closest information from the social link that was not used by our metrics.
 
-Running the metrics analysis based on this assumption gave the results diplayed in figure \ref{1}. The true positive rate is defined as $\text{TPR} = \frac{n_{TP}}{n_{TP} + n_{FN}}$ and the false positive rate as $\text{FPR} = \frac{n_{FP}}{n_{FP} + n_{TN}}$ with $n_{TP}$ the number of true positives, $n_{TN}$ the number of true negatives, $n_{FP}$ the number of false positives and $n_{FN}$ the number of false negatives. We observe that no metric gives a true positive rate higher than $0.6$ which is highly insufficient to be reliable. From this result we can conclude that either our metrics are not pertinent to infer social links or our previous assumption is too often false, i.e. people from different clubs know each other.
-
-![Threshold analysis (1000 samples) \label{1}](threshold.png){ width=100% }
+Running the metrics analysis based on this assumption gave the results diplayed in figure \ref{1} in appendix. The true positive rate is defined as $\text{TPR} = \frac{n_{TP}}{n_{TP} + n_{FN}}$ and the false positive rate as $\text{FPR} = \frac{n_{FP}}{n_{FP} + n_{TN}}$ with $n_{TP}$ the number of true positives, $n_{TN}$ the number of true negatives, $n_{FP}$ the number of false positives and $n_{FN}$ the number of false negatives. We observe that no metric gives a true positive rate higher than $0.6$ which is highly insufficient to be reliable. From this result we can conclude that either our metrics are not pertinent to infer social links or our previous assumption is too often false, i.e. people from different clubs know each other.
 
 As we could not properly conduct this analysis, the choice of the threshold and metric in the final application is left to the user.
 
@@ -84,5 +88,17 @@ The final application asks for a name and computes the metrics for all potential
 This application was designed for runners to check if they suffer from a privacy breach on this particular website and to see if they are vulnerable to social engineering attacks.
 
 # Conclusion
+
+# Appendix
+
+## Implementation
+
+## Figures
+
+![Database architecture \label{2}](database.png){ width=65% }
+
+![Threshold analysis (1000 samples) \label{1}](threshold.png){ width=100% }
+
+\newpage
 
 # References
