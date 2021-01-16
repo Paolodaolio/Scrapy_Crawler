@@ -79,25 +79,28 @@ As we could not properly conduct this analysis, the choice of the threshold and 
 
 ## Analysis Python Module
 
-The final application is provided in `analysis_module/main_link.py`.
-
-To make it work, the user needs to be connected to the database filled with the data scraped by the scraping module. This data is stored in `Data/backup_[date]` and can be loaded in a postgreSQL database with the command `psql runners < backup_[date]`. It may be required to tweak the file `analysis_module/database/connection.py` to match each specific configuration of the database. All the queries needed to perform the analysis are implemented in `analysis_module/database/manager.py`.
-
-The final application asks for a name and computes the metrics for all potentially linked runners from the database. We start by fetching all runners that has at least one race in common with the targetted runner. Then we compute the metrics matrix that stores the value returned for each metric and for each runner. Finally we provide a way for the user to have a comprehensive view of this matrix by displaying the most probable linked runners based on each metric or the mean of all them.
+The final application asks for a name and computes the metrics for all potentially linked runners from the database. We start by fetching all runners that have at least one race in common with the targetted runner. Then we compute the metrics matrix that stores the value returned for each metric and for each runner. Finally we provide a way for the user to have a comprehensive view of this matrix by displaying the most probable linked runners based on each metric or the mean of all them.
 
 This application was designed for runners to check if they suffer from a privacy breach on this particular website and to see if they are vulnerable to social engineering attacks.
+For instance, we ran the application of a known runner and the application provided a very good result in second position based on the mean of all metrics. The output of the application is diplayed in figure \ref{3} in appendix. This proves that this application can be a tool to perform social engineering attacks.
 
 # Conclusion
 
 # Appendix
 
-## Implementation
+## Implementation and usage
+
+The final application is provided in `analysis_module/main_link.py`.
+
+To make it work, the user needs to be connected to the database filled with the data scraped by the scraping module. This data is stored in `Data/backup_[date]` and can be loaded in a postgreSQL database with the command `psql runners < backup_[date]`. It may be required to tweak the file `analysis_module/database/connection.py` to match each specific configuration of the database. All the queries needed to perform the analysis are implemented in `analysis_module/database/manager.py`.
 
 ## Figures
 
 ![Database architecture \label{2}](database.png){ width=65% }
 
 ![Threshold analysis (1000 samples) \label{1}](threshold.png){ width=100% }
+
+![Output of the main application \label{3}](cedric_white.png){ width=100% }
 
 \newpage
 
