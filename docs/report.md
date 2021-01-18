@@ -100,7 +100,9 @@ We were able to collect a very large amount of data in our database where we fou
 The code of both parts of this project is publicly available at <https://github.com/Paolodaolio/Scrapy_Crawler>.
 The scraping part is stored under `scraping_module/` and the analysis part under `analysis_module/`. The `docs/` directory stores all the documents used to make this report and the associated presentation.
 
-For the scraping module, ...
+For the scraping module, in the directory `Database` are present 3 files: `postgre_DB.py` that creates the connection `postgre_DB_manager.py` that handles every operation on the database and also `postgre_DB_manager2.0.py` that is a second version with little changes is order to work better for the analysis part.
+The rest of the files are directly for scraping `name_scrape.py` implements functions to collect and store information about runners, `race_scrape` has a "routine" function to analyze a race and gather all the possible information. Finally `main_routine.py` uses all the other files to perform an automated scraping routine and also storing everything in the database.
+Other useful file are `classes.py` that contain all the classes used to handle better the information gathered and also `string_tools.py` that is used in every module where we have to manage strings downloaded from the html and format them in our preferred shape.
 
 For the analysis module, all the files that make the connection with the database are under `database/`, the python classes are under `classes/` and the main programs are directly in `analysis_module`. Like for the scraping module, the file `database/connection.py` is used to connect to the PostgreSQL database and the file `database/manager.py` is used to perfom queries on the database.
 
